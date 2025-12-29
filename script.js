@@ -119,6 +119,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 thumbnailVideo.pause();
                 thumbnailVideo.currentTime = 0;
             });
+
+            // Get video duration and update the duration badge
+            thumbnailVideo.addEventListener('loadedmetadata', () => {
+                const duration = thumbnailVideo.duration;
+                const minutes = Math.floor(duration / 60);
+                const seconds = Math.floor(duration % 60);
+                const durationText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                const durationBadge = card.querySelector('.duration');
+                if (durationBadge) {
+                    durationBadge.textContent = durationText;
+                }
+            });
         }
     });
 
